@@ -1,0 +1,20 @@
+{
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDescription__",
+  "version": "0.1.0",
+  "manifest_version": 3,
+  "default_locale": "en",
+  "action": {
+    "default_title": "Quick BOJ",
+    "default_popup": "popup.html"
+  },
+  "permissions": ["storage", "tabs"],
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+B"
+      },
+      "description": "Quick BOJ 팝업 열기"
+    }
+  }
+}
