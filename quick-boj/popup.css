@@ -11,6 +11,18 @@
   --danger: #dc2626;
 }
 
+body[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #1e293b;
+  --surface: #334155;
+  --border: #475569;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --accent: #38bdf8;
+  --accent-hover: #7dd3fc;
+  --shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -20,6 +32,7 @@ body {
   font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Segoe UI', sans-serif;
   background: var(--bg);
   color: var(--text);
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .container {
@@ -28,6 +41,9 @@ body {
 }
 
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   margin-bottom: 14px;
 }
 
@@ -40,6 +56,22 @@ body {
   font-size: 12px;
   margin: 0;
   color: var(--muted);
+}
+
+.theme-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  font-size: 18px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-button:hover {
+  background: var(--surface);
 }
 
 .jump-form {
@@ -67,6 +99,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .input::placeholder {
@@ -76,7 +109,7 @@ body {
 .input:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(0, 118, 192, 0.15);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
 }
 
 .button {
@@ -89,6 +122,11 @@ body {
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+body[data-theme='dark'] .button {
+  color: #0f172a;
 }
 
 .button:hover {
@@ -114,6 +152,7 @@ body {
   border: 1px solid var(--border);
   background: var(--surface);
   box-shadow: var(--shadow);
+  transition: background-color 0.2s, border-color 0.2s;
 }
 
 .section-header {
@@ -157,13 +196,14 @@ body {
   justify-content: space-between;
   padding: 8px 10px;
   border-radius: 10px;
-  background: #ffffff;
+  background: var(--bg);
   border: 1px solid var(--border);
+  transition: background-color 0.2s, border-color 0.2s;
 }
 
 .list-item:hover {
-  border-color: #cbd5f5;
-  background: #f8fafc;
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  background: var(--surface);
 }
 
 .list-link {

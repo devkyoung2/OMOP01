@@ -1,6 +1,7 @@
 const MAX_RECENT = 10;
 const STORAGE_KEYS = {
   recent: "quickBojRecent",
+  theme: "quickBojTheme",
 };
 
 const form = document.getElementById("jump-form");
@@ -9,6 +10,7 @@ const statusEl = document.getElementById("status");
 const recentList = document.getElementById("recent-list");
 const recentEmpty = document.getElementById("recent-empty");
 const clearRecentButton = document.getElementById("clear-recent");
+const themeToggleButton = document.getElementById("theme-toggle");
 
 let recentNumbers = [];
 
@@ -77,6 +79,18 @@ function renderLists() {
   updateEmptyState();
 }
 
+function applyTheme(theme) {
+  document.body.dataset.theme = theme;
+  themeToggleButton.textContent = theme === 'dark' ? '☀️' : '🌙';
+}
+
+async function toggleTheme() {
+  const currentTheme = document.body.dataset.theme;
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  applyTheme(newTheme);
+  await setStorage({ [STORAGE_KEYS.theme]: newTheme });
+}
+
 async function addRecent(number) {
   recentNumbers = [number, ...recentNumbers.filter((item) => item !== number)];
   if (recentNumbers.length > MAX_RECENT) {
@@ -106,9 +120,14 @@ async function handleSubmit(event) {
 }
 
 async function init() {
-  const data = await getStorage([STORAGE_KEYS.recent]);
+  const data = await getStorage([STORAGE_KEYS.recent, STORAGE_KEYS.theme]);
+  
+  const currentTheme = data[STORAGE_KEYS.theme] || 'light';
+  applyTheme(currentTheme);
+  
   recentNumbers = data[STORAGE_KEYS.recent] || [];
   renderLists();
+  
   input.focus();
 }
 
@@ -118,5 +137,6 @@ input.addEventListener("input", () => {
 
 form.addEventListener("submit", handleSubmit);
 clearRecentButton.addEventListener("click", clearRecent);
+themeToggleButton.addEventListener("click", toggleTheme);
 
 init();
