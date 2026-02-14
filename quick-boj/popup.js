@@ -38,7 +38,15 @@ function normalizeNumber(value) {
 
 function openProblem(number) {
   const url = `https://www.acmicpc.net/problem/${number}`;
-  chrome.tabs.create({ url });
+  if (chrome?.tabs?.create) {
+    chrome.tabs.create({ url }, () => {
+      if (chrome.runtime.lastError) {
+        window.open(url, "_blank", "noopener");
+      }
+    });
+    return;
+  }
+  window.open(url, "_blank", "noopener");
 }
 
 function setStatus(message) {
@@ -130,6 +138,10 @@ async function init() {
   renderLists();
   input.focus();
 }
+
+input.addEventListener("input", () => {
+  input.value = input.value.replace(/[^0-9]/g, "");
+});
 
 form.addEventListener("submit", handleSubmit);
 clearRecentButton.addEventListener("click", clearRecent);
