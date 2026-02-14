@@ -6,7 +6,16 @@
   "default_locale": "en",
   "action": {
     "default_title": "Quick BOJ",
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/logo16.png",
+      "48": "images/logo48.png"
+    }
+  },
+  "icons": {
+    "16": "images/logo16.png",
+    "48": "images/logo48.png",
+    "128": "images/logo128.png"
   },
   "permissions": ["storage", "tabs"],
   "commands": {
