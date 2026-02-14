@@ -16,14 +16,7 @@
       <form id="jump-form" class="jump-form" autocomplete="off">
         <label class="label" for="problem-id">문제 번호</label>
         <div class="input-row">
-          <input
-            id="problem-id"
-            class="input"
-            type="text"
-            inputmode="numeric"
-            pattern="[0-9]*"
-            placeholder="예: 7569"
-          />
+          <input id="problem-id" class="input" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="예: 1000" />
           <button class="button" type="submit">이동</button>
         </div>
         <p id="status" class="status" aria-live="polite"></p>
@@ -32,9 +25,7 @@
       <section class="section">
         <div class="section-header">
           <h2 class="section-title">최근 기록</h2>
-          <button id="clear-recent" class="text-button" type="button">
-            지우기
-          </button>
+          <button id="clear-recent" class="text-button" type="button">지우기</button>
         </div>
         <ul id="recent-list" class="list"></ul>
         <p id="recent-empty" class="empty">아직 기록이 없습니다.</p>
