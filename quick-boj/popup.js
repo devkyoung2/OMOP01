@@ -1,7 +1,6 @@
 const MAX_RECENT = 10;
 const STORAGE_KEYS = {
   recent: "quickBojRecent",
-  favorites: "quickBojFavorites",
 };
 
 const form = document.getElementById("jump-form");
@@ -9,12 +8,9 @@ const input = document.getElementById("problem-id");
 const statusEl = document.getElementById("status");
 const recentList = document.getElementById("recent-list");
 const recentEmpty = document.getElementById("recent-empty");
-const favoriteList = document.getElementById("favorite-list");
-const favoriteEmpty = document.getElementById("favorite-empty");
 const clearRecentButton = document.getElementById("clear-recent");
 
 let recentNumbers = [];
-let favoriteNumbers = [];
 
 function getStorage(keys) {
   return new Promise((resolve) => {
@@ -55,10 +51,9 @@ function setStatus(message) {
 
 function updateEmptyState() {
   recentEmpty.style.display = recentNumbers.length ? "none" : "block";
-  favoriteEmpty.style.display = favoriteNumbers.length ? "none" : "block";
 }
 
-function createListItem(number, isFavorite) {
+function createListItem(number) {
   const li = document.createElement("li");
   li.className = "list-item";
 
@@ -68,39 +63,18 @@ function createListItem(number, isFavorite) {
   link.textContent = `#${number}`;
   link.addEventListener("click", () => openProblem(number));
 
-  const star = document.createElement("button");
-  star.type = "button";
-  star.className = `star-button${isFavorite ? " is-active" : ""}`;
-  star.textContent = "★";
-  star.addEventListener("click", () => toggleFavorite(number));
-
-  li.append(link, star);
+  li.append(link);
   return li;
 }
 
 function renderLists() {
   recentList.innerHTML = "";
-  favoriteList.innerHTML = "";
 
   recentNumbers.forEach((number) => {
-    recentList.appendChild(createListItem(number, favoriteNumbers.includes(number)));
-  });
-
-  favoriteNumbers.forEach((number) => {
-    favoriteList.appendChild(createListItem(number, true));
+    recentList.appendChild(createListItem(number));
   });
 
   updateEmptyState();
-}
-
-async function toggleFavorite(number) {
-  if (favoriteNumbers.includes(number)) {
-    favoriteNumbers = favoriteNumbers.filter((item) => item !== number);
-  } else {
-    favoriteNumbers = [number, ...favoriteNumbers];
-  }
-  await setStorage({ [STORAGE_KEYS.favorites]: favoriteNumbers });
-  renderLists();
 }
 
 async function addRecent(number) {
@@ -132,9 +106,8 @@ async function handleSubmit(event) {
 }
 
 async function init() {
-  const data = await getStorage([STORAGE_KEYS.recent, STORAGE_KEYS.favorites]);
+  const data = await getStorage([STORAGE_KEYS.recent]);
   recentNumbers = data[STORAGE_KEYS.recent] || [];
-  favoriteNumbers = data[STORAGE_KEYS.favorites] || [];
   renderLists();
   input.focus();
 }
