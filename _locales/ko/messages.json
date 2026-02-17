@@ -4,5 +4,8 @@
   },
   "extensionDescription": {
     "message": "백준 문제 번호로 빠르게 이동합니다."
+  },
+  "commandOpenPopup": {
+    "message": "Quick BOJ 팝업 열기"
   }
 }

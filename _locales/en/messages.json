@@ -4,5 +4,8 @@
   },
   "extensionDescription": {
     "message": "Jump quickly to BOJ problems by number."
+  },
+  "commandOpenPopup": {
+    "message": "Open Quick BOJ popup"
   }
 }

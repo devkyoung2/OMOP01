@@ -23,7 +23,7 @@
       "suggested_key": {
         "default": "Alt+Shift+B"
       },
-      "description": "Quick BOJ 팝업 열기"
+      "description": "__MSG_commandOpenPopup__"
     }
   }
 }
