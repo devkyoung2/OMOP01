@@ -36,14 +36,6 @@ function normalizeNumber(value) {
 
 function openProblem(number) {
   const url = `https://www.acmicpc.net/problem/${number}`;
-  if (chrome?.tabs?.create) {
-    chrome.tabs.create({ url }, () => {
-      if (chrome.runtime.lastError) {
-        window.open(url, "_blank", "noopener");
-      }
-    });
-    return;
-  }
   window.open(url, "_blank", "noopener");
 }
 

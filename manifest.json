@@ -17,7 +17,7 @@
     "48": "img/logo48.png",
     "128": "img/logo128.png"
   },
-  "permissions": ["storage", "tabs"],
+  "permissions": ["storage"],
   "commands": {
     "_execute_action": {
       "suggested_key": {
